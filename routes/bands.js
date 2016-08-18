@@ -22,6 +22,18 @@ router.get('/', function (req, res, next) {
     }
   })
 });
+//CREATE/POST BANDS
+router.post('/', function (req, res, next) {
+  const band = new Band(req.body)
+  band.save(function (err) {
+    if (err) {
+      res.status(500).send()
+    } else {
+      res.json(band)
+    }
+  })
+});
+
 
 
 
