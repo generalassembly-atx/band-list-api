@@ -48,6 +48,25 @@ router.get('/:bandId', function (req, res, next) {
   })
 });
 
+//PUT ROUTE
+router.put('/:bandId', function (req, res, next) {
+  Band.findByIdAndUpdate(req.params.bandId, {$set:req.body }, function (err, band) {
+    if (err) {
+      res.status(500).send()
+    } else {
+      if (band) {
+        Todo.findById(req.params.bandId, function (err, updatedBand) {
+          res.json(updatedBand)
+        })
+      } else {
+        res.status(404).send()
+      }
+    }
+  })
+})
+
+
+
 
 
 
