@@ -63,7 +63,20 @@ router.put('/:bandId', function (req, res, next) {
       }
     }
   })
+});
+
+//DELETE route
+router.delete('/:bandId', function (req, res, next) {
+  Band.findById(req.params.bandId).remove(function (err) {
+    if (err) {
+      res.status(500).send()
+    } else {
+      res.status(204).send()
+    }
+  })
 })
+
+
 
 
 
