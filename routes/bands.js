@@ -40,5 +40,14 @@ router.get('/:bandId', (req, res, next) => {
   })
 });
 
+router.delete('/:bandId', (req, res, next) => {
+  Band.findById(req.params.bandId).remove(function (err) {
+    if (err) {
+      res.status(500).send()
+    } else {
+      res.status(204).send()
+    }
+  })
+});
 
 module.exports = router;
