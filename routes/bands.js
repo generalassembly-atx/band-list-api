@@ -33,6 +33,20 @@ router.post('/', function (req, res, next) {
     }
   })
 });
+//READ route created
+router.get('/:bandId', function (req, res, next) {
+  Todo.findById(req.params.bandId, function (err, band) {
+    if (err) {
+      res.status(500).send()
+    } else {
+      if (band) {
+        res.json(band)
+      } else {
+        res.status(404).send()
+      }
+    }
+  })
+});
 
 
 
