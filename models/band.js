@@ -8,6 +8,6 @@ const bandSchema = {
   }
 
 
-const band = mongoose.model('Band', bandSche);
+const Band = mongoose.model('Band', bandSchema);
 
 module.exports = Band;
