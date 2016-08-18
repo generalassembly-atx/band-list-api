@@ -3,8 +3,8 @@
 const mongoose = require('mongoose');
 const bandSchema = {
   name: String,
-  geners: String,
-  curruptedByTheSystem: Boolean
+  genre: String,
+  corruptedByTheSystem: Boolean
   }
 
 
