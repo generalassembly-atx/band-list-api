@@ -35,7 +35,7 @@ router.post('/', function (req, res, next) {
 });
 //READ route created
 router.get('/:bandId', function (req, res, next) {
-  Todo.findById(req.params.bandId, function (err, band) {
+  Band.findById(req.params.bandId, function (err, band) {
     if (err) {
       res.status(500).send()
     } else {
@@ -50,7 +50,7 @@ router.get('/:bandId', function (req, res, next) {
 
 //PUT ROUTE
 router.put('/:bandId', function (req, res, next) {
-  Band.findByIdAndUpdate(req.params.bandId, {$set:req.body }, function (err, band) {
+  Band.findByIdAndUpdate(req.params.bandId, {$set:req.body}, function (err, band) {
     if (err) {
       res.status(500).send()
     } else {
@@ -63,7 +63,7 @@ router.put('/:bandId', function (req, res, next) {
       }
     }
   })
-});
+})
 
 //DELETE route
 router.delete('/:bandId', function (req, res, next) {
@@ -74,7 +74,7 @@ router.delete('/:bandId', function (req, res, next) {
       res.status(204).send()
     }
   })
-})
+});
 
 
 
