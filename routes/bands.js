@@ -9,7 +9,7 @@ router.use((req, res, next) => {
 })
 
 router.get('/', (req, res, next) => {
-  Band.find({}, (err, students) => {
+  Band.find({}, (err, bands) => {
     if (err) {
       res.status(500).send()
     } else {
