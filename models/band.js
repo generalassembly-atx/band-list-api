@@ -6,7 +6,7 @@ const mongoose = require('mongoose')
 var bandSchema = {
   name: String,
   genre: String,
-  corrputedByTheSystem: { type: Boolean, default: false },
+  corruptedByTheSystem: { type: Boolean, default: false },
 }
 
 const Band = mongoose.model('Band', bandSchema)
