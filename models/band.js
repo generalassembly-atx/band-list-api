@@ -3,12 +3,12 @@
 
 const mongoose = require('mongoose');
 
-var todoSchema = {
-  task: String,
-  completed: { type:Boolean, default:false},
-  userId: String
+var bandSchema = {
+  name: String,
+  genre: String,
+  corruptedByTheSystem: { type:Boolean, default:false}
 }
 
-const Todo = mongoose.model('Todo', todoSchema);
+const Band = mongoose.model('Band', bandSchema);
 
-module.exports = Todo;
+module.exports = Band;

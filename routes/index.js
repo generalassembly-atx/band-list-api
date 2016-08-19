@@ -7,6 +7,3 @@ router.get('/', function(req, res, next) {
 });
 
 module.exports = router;
-
-
-//do 5 routes, set up models, arc
