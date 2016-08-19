@@ -10,11 +10,11 @@ router.use(function (req, res, next) {
 
 //GET
 router.get('/', function(req, res, next) {
-  Band.find({}, function(err, bands) {
+  Band.find({}, function(err, band) {
     if (err) {
       res.status(500).send()
     } else {
-      res.json(bands)
+      res.json(band)
     }
   })
 });
@@ -23,15 +23,28 @@ router.get('/', function(req, res, next) {
 router.post('/', function(req, res, next) {
   const band = new Band(req.body)
   band.save(function (err) {
-  if (err) {
-    res.status(500).send()
-  } else {
-    res.json(band)
-  }
-})
+    if (err) {
+      res.status(500).send()
+    } else {
+      res.json(band)
+    }
+  })
 })
 
-
+//GET BY ID
+router.get('/:bandId', function (req, res, next) {
+  Band.findById(req.params.bandId, function (err, band) {
+    if (err) {
+      res.status(500).send()
+    } else {
+      if (band) {
+        res.json(band)
+      } else {
+        res.status(404).send()
+      }
+    }
+  })
+})
 
 
 
