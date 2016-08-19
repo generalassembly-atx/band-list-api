@@ -3,12 +3,12 @@
 
 const mongoose = require('mongoose')
 
-var bandsSchema = {
+var bandSchema = {
   name: String,
   genre: String,
   corrputedByTheSystem: Boolean
 }
 
-const Bands = mongoose.model('Bands, bandsSchema')
+const Band = mongoose.model('Band', bandSchema)
 
-module.exports = Bands;
+module.exports = Band;
