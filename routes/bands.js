@@ -4,7 +4,7 @@ var Band = require('../models/band.js')
 var _ = require('lodash');
 
 router.use(function (req, res, next) {
-  req.body = _.pick(req.body, ['name', 'genre', Boolean])
+  req.body = _.pick(req.body, ['name', 'genre', 'corruptedByTheSystem'])
   next()
 })
 
