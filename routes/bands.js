@@ -8,4 +8,29 @@ router.use(function (req, res, next) {
   next()
 })
 
+//GET
+router.get('/', function(req, res, next) {
+  Band.find({}, function(err, bands) {
+    if (err) {
+      res.status(500).send()
+    } else {
+      res.json(bands)
+    }
+  })
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 module.exports = router;
