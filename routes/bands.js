@@ -66,19 +66,4 @@ router.put('/:bandId', (req, res, next) => {
 })
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 module.exports = router;
