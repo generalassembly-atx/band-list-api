@@ -31,4 +31,49 @@ router.post('/', (req, res, next) => {
   })
 })
 
+//GET one
+router.get('/:bandId', function (req, res, next) {
+  Band.findById(req.params.bandId, function(err, band) {
+    if (err) {
+      res.status(500).send()
+    } else {
+      if (band) {
+        res.json(band)
+      } else {
+        res.status(404).send()
+      }
+    }
+  })
+})
+
+//DELETE
+router.delete('/:bandId', function(req, res, next) {
+  Band.findById(req.params.bandId).remove(function (err) {
+    if (err) {
+      res.status(500).send()
+    } else {
+      res.status(204).send()
+    }
+  })
+})
+
+//PUT
+router.put('/:bandId', function(req, res, next) {
+  Band.findByIdAndUpdate(req.params.bandId,{ $set: req.body
+  }, function (err, band) {
+    if (err) {
+      res.status(500).send()
+    } else {
+      if (band) {
+        Band.findById(req.params.bandId, function(err, updatedBand) {
+          res.json(updatedBand)
+        })
+      }
+      else {
+        res.status(404).send()
+      }
+    }
+  })
+})
+
 module.exports = router;
