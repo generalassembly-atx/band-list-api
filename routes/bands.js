@@ -27,6 +27,27 @@ router.post('/', (req, res, next) => {
     }
   })
 })
+router.get('/:bandId', (req, res, next) => {
+  Band.findById(req.params.bandId, (err, band) => {
+    if (err) {
+      res.status(500).send()
+    } else {
+      if (band) {
+        res.json(band)
+      } else {
+        res.status(404).send()
+      }
+    }
+  })
+})
+
+
+
+
+
+
+
+
 
 
 
