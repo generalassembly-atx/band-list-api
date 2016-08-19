@@ -7,8 +7,8 @@ router.use('/', (req, res, next) => {
   req.body = _.pick(req.body, ['name', 'genre', 'corruptedByTheSystem'])
  next()
 });
-router.get('/', function(req, res, next) {
-  Band.find({}, function (err, bands) {
+router.get('/', (req, res, next)=> {
+  Band.find({},  (err, bands)=> {
     if (err) {
       res.status(500).send()
     } else {
@@ -18,7 +18,7 @@ router.get('/', function(req, res, next) {
 });
 router.post('/', (req, res, next) => {
   const band = new Band(req.body)
- band.save(function (err) {
+ band.save( (err)=> {
    if (err) {
      res.status(500).send()
    } else {
@@ -27,7 +27,7 @@ router.post('/', (req, res, next) => {
  })
 });
 router.get('/:bandId', (req, res, next) => {
-  Band.findById(req.params.bandId, function (err, band) {
+  Band.findById(req.params.bandId,  (err, band) => {
     if (err) {
       res.status(500).send()
     } else {
@@ -41,12 +41,12 @@ router.get('/:bandId', (req, res, next) => {
 });
 
 router.put('/:bandId', (req, res, next) => {
-  Band.findByIdAndUpdate(req.params.bandId, {$set: req.body}, function (err, band) {
+  Band.findByIdAndUpdate(req.params.bandId, {$set: req.body},  (err, band) => {
     if (err) {
       res.status(500).send()
     } else {
       if (band) {
-        Band.findById(req.params.bandId, function (err, updatedBand) {
+        Band.findById(req.params.bandId, (err, updatedBand) => {
          res.json(updatedBand)
         })
       } else {
@@ -58,7 +58,7 @@ router.put('/:bandId', (req, res, next) => {
 
 
 router.delete('/:bandId', (req, res, next) => {
-  Band.findById(req.params.bandId).remove(function (err) {
+  Band.findById(req.params.bandId).remove( (err) => {
     if (err) {
       res.status(500).send()
     } else {
