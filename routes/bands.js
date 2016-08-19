@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var band = require('../models/band');
+var Band = require('../models/band');
 const _ = require('lodash');
 
 router.use('/', (req, res, next) => {
@@ -12,12 +12,12 @@ router.get('/', function(req, res, next) {
     if (err) {
       res.status(500).send()
     } else {
-      res.json(students)
+      res.json(bands)
     }
   })
 });
 router.post('/', (req, res, next) => {
-  const student = new Band(req.body)
+  const band = new Band(req.body)
  band.save(function (err) {
    if (err) {
      res.status(500).send()
@@ -39,6 +39,23 @@ router.get('/:bandId', (req, res, next) => {
     }
   })
 });
+
+router.put('/:bandId', (req, res, next) => {
+  Band.findByIdAndUpdate(req.params.bandId, {$set: req.body}, function (err, band) {
+    if (err) {
+      res.status(500).send()
+    } else {
+      if (band) {
+        Band.findById(req.params.bandId, function (err, updatedBand) {
+         res.json(updatedBand)
+        })
+      } else {
+        res.status(404).send()
+      }
+    }
+  })
+});
+
 
 router.delete('/:bandId', (req, res, next) => {
   Band.findById(req.params.bandId).remove(function (err) {
