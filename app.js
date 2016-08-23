@@ -13,6 +13,12 @@ mongoose.connect(process.env.DB_CONNECTION)
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var bands = require('./routes/bands');
+var jwt = require('express-jwt');
+
+var jwtCheck = jwt({
+  secret: new Buffer(process.env.AUTH0_CLIENT_SECRET, 'base64'),
+  audience: process.env.AUTH0_CLIENT_ID
+});
 
 var app = express();
 
@@ -28,6 +34,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors());
+
+app.use('/bands', jwtCheck)
 
 app.use('/', routes);
 app.use('/users', users);
