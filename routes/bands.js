@@ -28,6 +28,22 @@ router.post('/', (req, res, next) => {
     }
   })
 })
+
+router.use('/:bandId', function (req, res, next) {
+  Band.findOne({_id: req.params.bandId, userId: req.user.sub}, function (err. band) {
+    if (err) {
+      res.status(500).send()
+    } else {
+      if (band) {
+        res.band = band;
+        next()
+      } else {
+        res.status(404).send()
+      }
+    }
+  })
+})
+
 router.get('/:bandId', (req, res, next) => {
   Band.findById(req.params.bandId, (err, band) => {
     if (err) {
