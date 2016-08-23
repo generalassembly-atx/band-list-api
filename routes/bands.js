@@ -19,6 +19,7 @@ router.get('/', (req, res, next) => {
 });
 router.post('/', (req, res, next) => {
   const band = new Band(req.body)
+  band.userId = req.user.sub;
   band.save((err) => {
     if (err) {
       res.status(500).send()
