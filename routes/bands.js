@@ -8,29 +8,9 @@ router.use((req, res, next) => {
   next()
 })
 
-router.get('/', (req, res, next) => {
-  Band.find({userId:req.user.sub}, (err, bands) => {
-    if (err) {
-      res.status(500).send()
-    } else {
-      res.json(bands)
-    }
-  })
-});
-router.post('/', (req, res, next) => {
-  const band = new Band(req.body)
-  band.userId = req.user.sub;
-  band.save((err) => {
-    if (err) {
-      res.status(500).send()
-    } else {
-      res.json(band)
-    }
-  })
-})
-
 router.use('/:bandId', function (req, res, next) {
-  Band.findOne({_id: req.params.bandId, userId: req.user.sub}, function (err. band) {
+  console.log(req.user.sub);
+  Band.findOne({_id: req.params.bandId, userId: req.user.sub}, (err, band) => {
     if (err) {
       res.status(500).send()
     } else {
@@ -44,21 +24,36 @@ router.use('/:bandId', function (req, res, next) {
   })
 })
 
-router.get('/:bandId', (req, res, next) => {
-  Band.findById(req.params.bandId, (err, band) => {
+router.get('/', (req, res, next) => {
+  Band.find({userId:req.user.sub}, (err, bands) => {
     if (err) {
       res.status(500).send()
     } else {
-      if (band) {
-        res.json(band)
-      } else {
-        res.status(404).send()
-      }
+      res.json(bands)
+    }
+  })
+});
+
+router.post('/', (req, res, next) => {
+  const band = new Band(req.body)
+  band.userId = req.user.sub;
+  band.save((err) => {
+    if (err) {
+      res.status(500).send()
+    } else {
+      res.json(band)
     }
   })
 })
+
+
+
+router.get('/:bandId', (req, res, next) => {
+  res.json(res.band)
+})
+
 router.delete('/:bandId', (req, res, next) => {
-  Band.findById(req.params.bandId).remove((err) => {
+  res.band.remove((err) => {
     if (err) {
       res.status(500).send()
     } else {
@@ -66,18 +61,14 @@ router.delete('/:bandId', (req, res, next) => {
     }
   })
 })
-router.put('/:bandId', (req, res, next) => {
-  Band.findByIdAndUpdate(req.params.bandId, {$set: req.body}, (err, band) => {
+
+router.put('/:todoId', function (req, res, next) {
+  res.band = Object.assign(res.band, req.body)
+  res.band.save(function (err, updatedBand) {
     if (err) {
-      res.status(500).send()
+      res.status(500).send(err)
     } else {
-      if (band) {
-        Band.findById(req.params.bandId, (err, updatedBand) => {
-          res.json(updatedBand)
-        })
-      } else {
-        res.status(404).send()
-      }
+      res.json(updatedBand)
     }
   })
 })
