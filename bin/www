@@ -7,6 +7,9 @@
 var app = require('../app');
 var debug = require('debug')('band-list-api:server');
 var http = require('http');
+const cors = require('cors');
+
+app.use(cors());
 
 
 

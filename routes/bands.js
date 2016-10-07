@@ -4,6 +4,7 @@ var Band = require('../models/band')
 const _ = require('lodash');
 
 
+
 router.use((req, res, next) => {
   req.body = _.pick(req.body, ['name', 'genre', 'corruptedByTheSystem'])
   next()
