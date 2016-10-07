@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var Band = require('../models/band')
 const _ = require('lodash');
+const = require('cors');
 
 router.use((req, res, next) => {
   req.body = _.pick(req.body, ['name', 'genre', 'corruptedByTheSystem'])
