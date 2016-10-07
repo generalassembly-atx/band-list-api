@@ -41,10 +41,8 @@ app.use('/', routes);
 app.use('/users', users);
 app.use('/bands', bands);
 
-var corsOptions = {
-  origin: 'https://bandlistapi.herokuapp.com',
-  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
-};
+app.options('*', cors()); // include before other routes
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
