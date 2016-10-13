@@ -2,6 +2,7 @@ body {
   padding: 20px 85px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   background-color:rgb(200, 70, 30);
+  font-family: 'Work Sans';
 }
 
 a {
@@ -13,4 +14,8 @@ h1, h3 {
 }
 h3 {
   font-style: italic;
+}
+
+ul {
+  padding: 20px 150px;
 }
