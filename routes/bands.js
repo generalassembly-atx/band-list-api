@@ -37,6 +37,10 @@ router.get('/', function (req, res) {
 
 //GET /bands/:bandName
 
+router.get('/:bandName', function (req, res) {
+  res.json(res.band);
+})
+
 //POST /bands
 router.post('/', function (req, res) {
   var band = new Band(req.body);
