@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 const _ = require('lodash');
 
+var songs = require('./songs');
+
 var Band = require('../models/band');
 
 //LODASH MIDDLEWARE
@@ -11,8 +13,8 @@ router.use(function (req, res, next) {
   next();
 })
 
-router.use('/:bandName', function (req, res, next) {
-  Band.findById(req.params.bandName, function(err, band) {
+router.use('/:bandId', function (req, res, next) {
+  Band.findById(req.params.bandId, function(err, band) {
     if (err) {
       res.status(500).send();
     } else if (!band){
@@ -23,6 +25,8 @@ router.use('/:bandName', function (req, res, next) {
     }
   })
 })
+
+router.use('/:bandId/songs', songs);
 
 //GET /bands collection
 router.get('/', function (req, res) {
@@ -35,9 +39,9 @@ router.get('/', function (req, res) {
   })
 })
 
-//GET /bands/:bandName
+//GET /bands/:bandId
 
-router.get('/:bandName', function (req, res) {
+router.get('/:bandId', function (req, res) {
   res.json(res.band);
 })
 
@@ -53,9 +57,9 @@ router.post('/', function (req, res) {
   })
 })
 
-//PUT /:bandName
+//PUT /:bandId
 
-router.put('/:bandName', function (req, res) {
+router.put('/:bandId', function (req, res) {
   var updatedBand = Object.assign(res.band, req.body);
   updatedBand.save(function (err) {
     if (err) {
@@ -66,8 +70,8 @@ router.put('/:bandName', function (req, res) {
   })
 })
 
-//DELETE /bands/:bandName
-router.delete('/:bandName', function (req, res) {
+//DELETE /bands/:bandId
+router.delete('/:bandId', function (req, res) {
   res.band.remove(function (err) {
     if (err) {
       res.status(500).send();
