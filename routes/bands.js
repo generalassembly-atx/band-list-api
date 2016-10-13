@@ -53,8 +53,18 @@ router.post('/', function (req, res) {
   })
 })
 
-
 //PUT /:bandName
+
+router.put('/:bandName', function (req, res) {
+  var updatedBand = Object.assign(res.band, req.body);
+  updatedBand.save(function (err) {
+    if (err) {
+      res.status(500).send();
+    } else {
+      res.json(updatedBand);
+    }
+  })
+})
 
 //DELETE /bands/:bandName
 
