@@ -11,4 +11,4 @@ var bandSchema = {
 
 var Band = mongoose.model('Band', bandSchema);
 
-module.exports = Todo;
+module.exports = Band;
