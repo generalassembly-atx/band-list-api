@@ -8,7 +8,20 @@ var Band = require('../models/band');
 
 router.use(function (req, res, next) {
   req.body = _.pick(req.body, ["bandName", "numAlbums", "genre", "isSellOut"]);
-  next(); 
+  next();
+})
+
+router.use('/:bandName', function (req, res, next) {
+  Band.findById(req.params.bandName, function(err, band) {
+    if (err) {
+      res.status(500).send();
+    } else if (!band){
+      res.status(404).send();
+    } else {
+      res.band = band;
+      next();
+    }
+  })
 })
 
 //GET /bands collection
