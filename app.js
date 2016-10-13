@@ -1,17 +1,21 @@
 require('dotenv').config();
+
+// DEPENDENCIES
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-const mongoose = require('mongoose');
 
-mongoose.connect(process.env.DB_CONNECTION)
+//DATABASE CONNECTION
+var mongoose = require('mongoose');
+mongoose.connect(process.env.DB_CONNECTION);
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var bands = require('./routes/bands');
+
 
 var app = express();
 
