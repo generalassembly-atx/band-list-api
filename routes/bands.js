@@ -7,7 +7,7 @@ var Band = require('../models/band');
 
 // STEP 4. CREATE MIDDLEWARE
 router.use(function (req, res, next) {
-  req.body = _.pick(req.body, ['corruptedByTheSystem'])
+  req.body = _.pick(req.body, ['name', 'genre', 'corruptedByTheSystem'])
   next();
 })
 
@@ -48,10 +48,10 @@ router.post('/',function (req, res, next) {
 /*---------------------------------------------------------------------------*/
 
 
-// STEP 5. CREATE USE ROUTE
+// STEP 5. CREATE MIDDLEWARE .USE "FIND ONE" ROUTE
 
 router.use('/:id', function (req, res, next) {
-  Band.findOne(function (err) {
+  Band.findOne({'_id:': req.params.id}, function (err, band) {
     if(err){
       res.status(500).send();
     }else if (!band){
@@ -62,22 +62,34 @@ router.use('/:id', function (req, res, next) {
   })
 });
 
+router.get('/:id', function (req, res, next) {
+  res.json(res.todo);
+});
+
 // STEP 6. CREATE PUT "UPDATE ATTRIBUTE" ROUTE
 router.put('/:id', function (req, res, next) {
   var updatedBand = Object.assign(res.band, req.body)
   updatedBand.save(function (err) {
     if(err){
       res.status(500).send();
+    }else {
+      res.json(updatedBand);
     }
   })
 });
 
 
+// STEP 7. CREATE DELETE ROUTE
 
-
-router.get('/bands', function (req, res, next) {
-  res.json(band);
-})
+router.delete('/:id', function (req, res, next) {
+  res.band.remove(function (err) {
+    if(err){
+      res.status(500).send();
+    }else {
+      res.status(204).send();
+    }
+  })
+});
 
 
 module.exports = router;
