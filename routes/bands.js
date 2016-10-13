@@ -51,19 +51,20 @@ router.post('/',function (req, res, next) {
 // STEP 5. CREATE MIDDLEWARE .USE "FIND ONE" ROUTE
 
 router.use('/:id', function (req, res, next) {
-  Band.findOne({'_id:': req.params.id}, function (err, band) {
+  Band.findOne({'_id': req.params.id}, function (err, band) {
     if(err){
       res.status(500).send();
     }else if (!band){
       res.status(404).send();
     } else{
       res.band = band;
+      next();
     }
   })
 });
 
-router.get('/:id', function (req, res, next) {
-  res.json(res.todo);
+router.get('/:id', function (req, res) {
+  res.json(res.band);
 });
 
 // STEP 6. CREATE PUT "UPDATE ATTRIBUTE" ROUTE
@@ -81,7 +82,7 @@ router.put('/:id', function (req, res, next) {
 
 // STEP 7. CREATE DELETE ROUTE
 
-router.delete('/:id', function (req, res, next) {
+router.delete('/:id', function (req, res) {
   res.band.remove(function (err) {
     if(err){
       res.status(500).send();
