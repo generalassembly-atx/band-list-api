@@ -3,10 +3,18 @@ var router = express.Router();
 
 var Band = require('../models/band.js');
 
+var _ = require('lodash');
+
 
 // MIDDLE WARE
+    // setting up a whitelist
 
+router.use(function(req,res,next){
+  req.body = _.pick(req.body, ['name','genre','corruptedByTheSystem']);
+  next();
+})
 
+    // storing a singly requested record from DB
 router.use('/:id', function(req,res,next){
   Band.findById(req.params.id, function(err, band){
     res.band = band;
