@@ -67,5 +67,15 @@ router.put('/:bandName', function (req, res) {
 })
 
 //DELETE /bands/:bandName
+router.delete('/:bandName', function (req, res) {
+  res.band.remove(function (err) {
+    if (err) {
+      res.status(500).send();
+    } else {
+      res.status(204).send();
+    }
+  })
+})
+
 
 module.exports = router;
