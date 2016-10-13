@@ -35,6 +35,37 @@ router.post('/',function (req, res, next) {
   })
 });
 
+/// STEP 3. POST INSIDE REST CLIENT TO TEST '/'
+
+  ///ONCE THAT IS DONE, CREATE GET ROUTE FOR INPUTTED DATA///
+
+
+// STEP 4. CREATE PUT ROUTE
+
+router.put('/:id', function (req, res, next) {
+  var updatedBand = Object.assign(res.band, req.body)
+  updatedBand.save(function (err) {
+    if(err){
+      res.status(500).send();
+    }else {
+      res.json(band);
+    }
+  })
+});
+
+
+// STEP . CREATE USE ROUTE
+
+router.use('/', function (req, res, next) {
+  Band.findOne(), function (err) {
+    if(err){
+      res.status(500).send();
+    }else {
+      res.json(band);
+    }
+  }
+})
+
 router.get('/bands', function (req, res, next) {
   Band.find()
 })
