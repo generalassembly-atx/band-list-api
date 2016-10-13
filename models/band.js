@@ -9,6 +9,6 @@ var bandSchema = {
   corruptedByTheSystem: Boolean
 }
 
-var Band = mongoose.model('Band', bandSchema);
+var Band = mongoose.model('Bands', bandSchema);
 
 module.exports = Band;
