@@ -1,7 +1,13 @@
 var express = require('express');
 var router = express.Router();
-
+const _ = require('lodash');
 const Band = require('../models/band');
+const songs = require('./songs');
+
+// router.use(function(req, res, next){
+//   request.body = _.pick(request.body, ['bandName', 'genre', 'rating', 'isCool']);
+//   next();
+// })
 
 router.use('/:bandid', function(req, res, next){
   Band.findOne({"_id" : req.params.bandid}, function(err, band){
@@ -15,6 +21,10 @@ router.use('/:bandid', function(req, res, next){
     }
   })
 })
+
+//Songs
+router.use('/:bandid', songs);
+
 // get all bands method
 router.get('/', function(req, res, next){
   Band.find({}, function(err, bands){
