@@ -1,21 +1,15 @@
 // : Add and export band model
 // attrs: name, genre, corruptedByTheSystem
 
-const mongoose = require('mongoose'), Schema = mongoose.Schema;
+const mongoose = require('mongoose');
 
-const bandSchema = Schema({
+const bandSchema = {
   bandName: String,
   genre: String,
   numAlbums: Number,
-  isSellOut: Boolean
-  songs: [{type: Schema.Types.ObjectId, ref: 'Song'}]
-});
-
-const songSchema = Schema({
-  _bandName: {type: String, ref: 'Band'},
-  title: String,
-})
+  isSellOut: Boolean,
+  songs: [{type:mongoose.Schema.Types.ObjectId, ref : "Song"}]
+}
 
 const Band = mongoose.model('Band', bandSchema);
-const Song = mongoose.model('Song', songSchema);
 module.exports = Band;
