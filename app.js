@@ -1,4 +1,4 @@
-require('dotenv').config();
+require('dotenv').config({silent: true});
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -7,7 +7,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
-mongoose.connect(process.env.DB_CONNECTION)
+mongoose.connect(process.env.DB_CONN);
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
