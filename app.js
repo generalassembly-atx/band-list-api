@@ -12,6 +12,7 @@ mongoose.connect(process.env.DB_CONNECTION)
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var bands = require('./routes/bands');
+var songs = require('./routes/songs')
 
 var app = express();
 
@@ -30,6 +31,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/users', users);
 app.use('/bands', bands);
+app.use('/songs', songs);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
